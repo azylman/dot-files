@@ -1,5 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
+;; start emacs server
+(server-start)
+
 ;; font-lock mode enables syntax highlighting
 (global-font-lock-mode 1)
 
