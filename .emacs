@@ -3,6 +3,9 @@
 ;; start emacs server
 (server-start)
 
+;; replace highlighted text when possible
+(delete-selection-mode 1)
+
 ;; font-lock mode enables syntax highlighting
 (global-font-lock-mode 1)
 
