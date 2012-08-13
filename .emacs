@@ -29,6 +29,26 @@
 (global-set-key "\M-q" 'query-replace)
 (global-set-key "\M-1" 'revert-buffer)
 (global-set-key [\C-escape] 'electric-buffer-list)
+(global-set-key [up] 'drill-instructor-alert-up)
+(global-set-key [down] 'drill-instructor-alert-down)
+(global-set-key [right] 'drill-instructor-alert-right)
+(global-set-key [left] 'drill-instructor-alert-left)
+
+(defun drill-instructor-alert-up ()
+  (interactive)
+  (message "Don't use up-key!!! Press C-p!! M-p!!!"))
+
+(defun drill-instructor-alert-down ()
+  (interactive)
+  (message "Don't use down-key!!! Press C-n!! M-n!!!"))
+
+(defun drill-instructor-alert-right ()
+  (interactive)
+  (message "Don't use right-key!!! Press C-f!! M-f!!!"))
+
+(defun drill-instructor-alert-left ()
+  (interactive)
+  (message "Don't use left-key!!! Press C-b!! M-b!!!"))
 
 ;; scroll line by line
 (setq scroll-step 1)
