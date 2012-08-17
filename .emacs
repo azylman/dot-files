@@ -1,5 +1,24 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
+;; clear eshell - http://www.khngai.com/emacs/eshell.php
+(defun eshell/clear ()
+  "04Dec2001 - sailor, to clear the eshell buffer."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+
+;; http://emacs.wordpress.com/2007/01/17/eval-and-replace-anywhere/
+(defun fc-eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))
+(global-set-key (kbd "C-c e") 'fc-eval-and-replace)
+
 ;; start emacs server
 (server-start)
 
@@ -111,3 +130,16 @@
 ;; php
 (add-to-list 'load-path "~/.emacs.d/php-mode")
 (require 'php-mode)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(solarized-contrast (quote high)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(put 'erase-buffer 'disabled nil)
