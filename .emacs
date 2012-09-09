@@ -73,8 +73,11 @@
 (setq frame-title-format (concat  "%b - emacs@" system-name))
 
 ;; color theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
-(load-theme 'solarized-light t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
+;; (load-theme 'solarized-light t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/tomorrow-theme/GNU Emacs")
+;; (load-theme 'tomorrow-night t)
+(load-theme 'tomorrow-night-bright t)
 
 ;; GUIs are for b*tches
 (tool-bar-mode -1)
@@ -113,7 +116,8 @@
 (setq compilation-window-height 10)
 
 ;; inconsolata font (this sometimes doesn't work...)
-(set-default-font "Inconsolata-14")
+;; (set-default-font "Inconsolata-14")
+(set-default-font "Menlo-13:antialias=natural")
 
 ;; don't wrap long lines onto new lines
 (set-default 'truncate-lines t)
