@@ -1,7 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
 (when (equal system-type 'darwin)
-  (setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:" (getenv "PATH")))
+  (push "/usr/local/bin" exec-path)
   (push "/opt/local/bin" exec-path))
 
 ;; I have had it with these motherfuckin' bakup files on this motherfuckin' filesystem
