@@ -1,5 +1,43 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
+(when (equal system-type 'darwin)
+  (setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:" (getenv "PATH")))
+  (push "/opt/local/bin" exec-path))
+
+;; I have had it with these motherfuckin' bakup files on this motherfuckin' filesystem
+(setq make-backup-files nil)
+
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; Toggle between split windows and a single window
+;; http://thornydev.blogspot.com/2012/08/happiness-is-emacs-trifecta.html
+(defun toggle-windows-split()
+  "Switch back and forth between one window and whatever split of windows we might have in the frame. The idea is to maximize the current buffer, while being able to go back to the previous split of windows in the frame simply by calling this command again."
+  (interactive)
+  (if (not (window-minibuffer-p (selected-window)))
+      (progn
+        (if (< 1 (count-windows))
+            (progn
+              (window-configuration-to-register ?u)
+              (delete-other-windows))
+          (jump-to-register ?u))))
+  (my-iswitchb-close))
+
+;; ace-jump-mode https://github.com/winterTTr/ace-jump-mode
+;; word jump C-c spc 
+;; char jump C-u C-c spc
+;; line jump C-u C-u C-c spc
+(add-to-list 'load-path "~/.emacs.d/ace-jump-mode")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+(define-key global-map (kbd "C-|") 'toggle-windows-split)
+
 ;; clear eshell - http://www.khngai.com/emacs/eshell.php
 (defun eshell/clear ()
   "04Dec2001 - sailor, to clear the eshell buffer."
