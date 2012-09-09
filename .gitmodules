@@ -16,3 +16,9 @@
 [submodule ".emacs.d/emacs-color-theme-solarized"]
 	path = .emacs.d/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule ".emacs.d/ace-jump-mode"]
+	path = .emacs.d/ace-jump-mode
+	url = git://github.com/winterTTr/ace-jump-mode.git
+[submodule ".emacs.d/tomorrow-theme"]
+	path = .emacs.d/tomorrow-theme
+	url = https://github.com/chriskempson/tomorrow-theme.git
