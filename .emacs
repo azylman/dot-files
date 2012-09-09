@@ -77,7 +77,8 @@
 ;; (load-theme 'solarized-light t)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/tomorrow-theme/GNU Emacs")
 ;; (load-theme 'tomorrow-night t)
-(load-theme 'tomorrow-night-bright t)
+;; (load-theme 'tomorrow-night-bright t)
+(load-theme 'tomorrow-night-eighties t)
 
 ;; GUIs are for b*tches
 (tool-bar-mode -1)
@@ -117,7 +118,8 @@
 
 ;; inconsolata font (this sometimes doesn't work...)
 ;; (set-default-font "Inconsolata-14")
-(set-default-font "Menlo-13:antialias=natural")
+;; (set-default-font "Menlo-13:antialias=natural")
+(set-default-font "Menlo-13:antialias=none")
 
 ;; don't wrap long lines onto new lines
 (set-default 'truncate-lines t)
