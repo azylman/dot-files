@@ -1,5 +1,9 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 (when (equal system-type 'darwin)
   (push "/usr/local/bin" exec-path)
   (push "/opt/local/bin" exec-path))
