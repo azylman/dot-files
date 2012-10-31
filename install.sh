@@ -1,5 +1,7 @@
 #!/bin/bash
 
-ln -s .emacs ~/.emacs
-ln -s .emacs.d/ ~/.emacs.d
-ln -s .slate ~/.slate
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+ln -s $DIR/.emacs ~/.emacs
+ln -s $DIR/.emacs.d/ ~/.emacs.d
+ln -s $DIR/.slate ~/.slate
