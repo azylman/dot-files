@@ -7,6 +7,7 @@
       "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+;; Expand region and pending delete mode: http://emacsrocks.com/e09.html
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 ;; Delete active text when you start typing
