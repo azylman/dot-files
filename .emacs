@@ -4,9 +4,9 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-(when (equal system-type 'darwin)
-  (push "/usr/local/bin" exec-path)
-  (push "/opt/local/bin" exec-path))
+(push "/usr/bin" exec-path)
+(push "/usr/local/bin" exec-path)
+(push "/opt/local/bin" exec-path)
 
 ;; I have had it with these motherfuckin' bakup files on this motherfuckin' filesystem
 (setq make-backup-files nil)
