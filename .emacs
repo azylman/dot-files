@@ -42,7 +42,7 @@
   (my-iswitchb-close))
 
 ;; ace-jump-mode https://github.com/winterTTr/ace-jump-mode
-;; word jump C-c spc 
+;; word jump C-c spc
 ;; char jump C-u C-c spc
 ;; line jump C-u C-u C-c spc
 (add-to-list 'load-path "~/.emacs.d/ace-jump-mode")
