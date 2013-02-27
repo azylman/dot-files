@@ -53,7 +53,7 @@
 ;; word jump C-c spc
 ;; char jump C-u C-c spc
 ;; line jump C-u C-u C-c spc
-(add-to-list 'load-path "~/.emacs.d/ace-jump-mode")
+(require 'ace-jump-mode)
 (autoload
   'ace-jump-mode
   "ace-jump-mode"
@@ -168,22 +168,19 @@
         (setq python-indent 2)))
 
 ;; coffee-mode: https://github.com/defunkt/coffee-mode
-(add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 (setq coffee-tab-width 2)
 
 ;; less css mode: https://github.com/purcell/less-css-mode
-(add-to-list 'load-path "~/.emacs.d/less-css-mode")
 (setq css-indent-offset 2)
 (require 'less-css-mode)
 
 ;; use markdown mode
-(add-to-list 'load-path "~/.emacs.d/markdown-mode")
+(require 'markdown-mode)
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 ;;(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
-;;(require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
 (defun markdown-custom ()
@@ -195,7 +192,6 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 
 ;; jade html templates
-(add-to-list 'load-path "~/.emacs.d/jade-mode")
 (require 'sws-mode)
 (require 'jade-mode)
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
@@ -205,11 +201,9 @@
 (add-to-list 'auto-mode-alist '("\\.md$" . longlines-mode))
 
 ;; clojure
-(add-to-list 'load-path "~/.emacs.d/clojure-mode")
 (require 'clojure-mode)
 
 ;; php
-(add-to-list 'load-path "~/.emacs.d/php-mode")
 (require 'php-mode)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
