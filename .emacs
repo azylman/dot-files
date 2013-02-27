@@ -35,6 +35,11 @@
   (jump-to-register :magit-fullscreen))
 (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
 
+(require 'git-commit-mode)
+(require 'gitconfig-mode)
+(require 'gitignore-mode)
+(require 'magithub)
+
 ;; Toggle between split windows and a single window
 ;; http://thornydev.blogspot.com/2012/08/happiness-is-emacs-trifecta.html
 (defun toggle-windows-split()
