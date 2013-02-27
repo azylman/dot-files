@@ -168,6 +168,7 @@
         (setq python-indent 2)))
 
 ;; coffee-mode: https://github.com/defunkt/coffee-mode
+(add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
