@@ -1,5 +1,13 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
+;; get marmalade packages in package.el
+(require 'package)
+(add-to-list 'package-archives
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;; use interactive mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
