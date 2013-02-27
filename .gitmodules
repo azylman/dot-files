@@ -22,3 +22,6 @@
 [submodule ".emacs.d/tomorrow-theme"]
 	path = .emacs.d/tomorrow-theme
 	url = https://github.com/chriskempson/tomorrow-theme.git
+[submodule ".emacs.d/markdown-mode"]
+	path = .emacs.d/markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git
