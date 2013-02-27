@@ -97,7 +97,7 @@
 ;; (load-theme 'tomorrow-night-bright t)
 (load-theme 'tomorrow-night-eighties t)
 
-;; GUIs are for b*tches
+;; GUIs are for hipsters
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
