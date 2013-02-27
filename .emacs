@@ -7,6 +7,11 @@
       "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+;; Delete active text when you start typing
+(pending-delete-mode t)
+
 ;; use interactive mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
