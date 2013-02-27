@@ -171,6 +171,18 @@
 (setq css-indent-offset 2)
 (require 'less-css-mode)
 
+;; use markdown mode
+(add-to-list 'load-path "~/.emacs.d/markdown-mode")
+(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+;;(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+;;(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+(defun markdown-custom ()
+       "markdown-mode-hook"
+       (setq markdown-command "/usr/local/bin/markdown"))
+     (add-hook 'markdown-mode-hook '(lambda() (markdown-custom)))
+
 ;; use js mode for json
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
 
