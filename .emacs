@@ -264,3 +264,12 @@ Don't mess with special buffers."
     (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
       (kill-buffer buffer))))
 (global-set-key (kbd "C-c k") 'kill-other-buffers)
+
+(add-to-list 'load-path "~/.emacs.d/inf-mongo")
+(require 'inf-mongo)
+
+;; http://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
+;; use the same $PATH that we have on the shell
+(require 'exec-path-from-shell)
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))

@@ -4,3 +4,6 @@
 [submodule ".emacs.d/coffee-mode"]
 	path = .emacs.d/coffee-mode
 	url = git://github.com/defunkt/coffee-mode.git
+[submodule ".emacs.d/inf-mongo"]
+	path = .emacs.d/inf-mongo
+	url = git://github.com/tobiassvn/inf-mongo.git
