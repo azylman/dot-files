@@ -181,8 +181,6 @@
 ;; coffee-mode: https://github.com/defunkt/coffee-mode
 (add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 (setq coffee-tab-width 2)
 
 ;; less css mode: https://github.com/purcell/less-css-mode
@@ -211,10 +209,18 @@
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
 ;; Longlines mode for markdown files
-(add-to-list 'auto-mode-alist '("\\.md$" . longlines-mode))
 
 ;; clojure
 (require 'clojure-mode)
+
+;; go
+(require 'go-mode)
+;; tabs are ok in go-mode
+(add-hook 'go-mode-hook
+          (lambda ()
+            (setq tab-width 4)
+            (setq whitespace-style '(face empty lines-tail trailing))))
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; php
 (require 'php-mode)
@@ -274,3 +280,22 @@ Don't mess with special buffers."
 (require 'exec-path-from-shell)
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
+
+;; yaml-mode
+(add-to-list 'load-path "~/.emacs.d/yaml-mode")
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.sls$" . yaml-mode))
+
+(setq require-final-newline t)
+
+(require 'ansi-color)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;; make sure colors show up in compilation buffer
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
