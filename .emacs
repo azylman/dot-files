@@ -1,11 +1,20 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
-;; get marmalade packages in package.el
+;; get melpa packages in package.el
 (require 'package)
 (add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+
+;; check if the packages is installed; if not, install it.
+(mapc
+ (lambda (package)
+   (or (package-installed-p package)
+       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
+           (package-install package))))
+ '(magit go-mode coffee-mode less-css-mode markdown-mode jade-mode ansi-color clojure-mode
+         ace-jump-mode exec-path-from-shell yaml-mode thrift magithub git-commit-mode gitconfig-mode
+         gitignore-mode whitespace sws-mode exec-path-from-shell recentf))
 
 ;; Expand region and pending delete mode: http://emacsrocks.com/e09.html
 (require 'expand-region)
@@ -25,8 +34,11 @@
 ;; I have had it with these motherfuckin' bakup files on this motherfuckin' filesystem
 (setq make-backup-files nil)
 
+;; https://github.com/nex3/magithub/issues/11
+(defvar magit-log-edit-confirm-cancellation nil)
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
+
 
 ;; Close magit with one key
 ;; http://whattheemacsd.com/setup-magit.el-01.html
@@ -179,7 +191,6 @@
         (setq python-indent 2)))
 
 ;; coffee-mode: https://github.com/defunkt/coffee-mode
-(add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
 (setq coffee-tab-width 2)
 
@@ -188,7 +199,6 @@
 (require 'less-css-mode)
 
 ;; use markdown mode
-(add-to-list 'load-path "~/.emacs.d/markdown-mode")
 (require 'markdown-mode)
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 ;;(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
@@ -223,7 +233,6 @@
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; php
-(require 'php-mode)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -272,9 +281,6 @@ Don't mess with special buffers."
       (kill-buffer buffer))))
 (global-set-key (kbd "C-c k") 'kill-other-buffers)
 
-(add-to-list 'load-path "~/.emacs.d/inf-mongo")
-(require 'inf-mongo)
-
 ;; http://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
 ;; use the same $PATH that we have on the shell
 (require 'exec-path-from-shell)
@@ -282,7 +288,6 @@ Don't mess with special buffers."
   (exec-path-from-shell-initialize))
 
 ;; yaml-mode
-(add-to-list 'load-path "~/.emacs.d/yaml-mode")
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.sls$" . yaml-mode))
