@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/")
+;; (add-to-list 'load-path "~/.emacs.d/")
 
 ;; get melpa packages in package.el
 (require 'package)
@@ -13,12 +13,10 @@
        (if (y-or-n-p (format "Package %s is missing. Install it? " package))
            (package-install package))))
  '(magit go-mode coffee-mode less-css-mode markdown-mode jade-mode ansi-color clojure-mode
-         ace-jump-mode exec-path-from-shell yaml-mode thrift magithub git-commit-mode gitconfig-mode
-         gitignore-mode whitespace sws-mode exec-path-from-shell recentf))
+         ace-jump-mode exec-path-from-shell yaml-mode thrift gitconfig-mode
+         gitignore-mode whitespace sws-mode exec-path-from-shell recentf zenburn-theme
+         typescript-mode jsx-mode))
 
-;; Expand region and pending delete mode: http://emacsrocks.com/e09.html
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
 ;; Delete active text when you start typing
 (pending-delete-mode t)
 
@@ -27,8 +25,8 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-(push "/usr/bin" exec-path)
 (push "/usr/local/bin" exec-path)
+(push "/usr/bin" exec-path)
 (push "/opt/local/bin" exec-path)
 
 ;; I have had it with these motherfuckin' bakup files on this motherfuckin' filesystem
@@ -36,9 +34,24 @@
 
 ;; https://github.com/nex3/magithub/issues/11
 (defvar magit-log-edit-confirm-cancellation nil)
+
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
-
+(setq magit-status-headers-hook
+      '(magit-insert-error-header
+        magit-insert-head-branch-header
+        magit-insert-push-branch-header))
+(setq magit-status-sections-hook
+      '(magit-insert-status-headers magit-insert-merge-log magit-insert-rebase-sequence
+;;                                    magit-insert-am-sequence magit-insert-sequencer-sequence
+;;                                    magit-insert-bisect-output magit-insert-bisect-rest
+;;                                    magit-insert-bisect-log
+                                    magit-insert-untracked-files magit-insert-unstaged-changes
+                                    magit-insert-staged-changes
+;;                                    magit-insert-stashes magit-insert-unpulled-from-upstream
+                                    magit-insert-unpulled-from-pushremote
+;;                                    magit-insert-unpushed-to-upstream
+                                    magit-insert-unpushed-to-pushremote))
 
 ;; Close magit with one key
 ;; http://whattheemacsd.com/setup-magit.el-01.html
@@ -52,11 +65,14 @@
   (kill-buffer)
   (jump-to-register :magit-fullscreen))
 (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+;; https://github.com/magit/magit/issues/2009
+(setq magit-branch-arguments (remove "--track" magit-branch-arguments))
+(setq magit-refresh-verbose t)
+(setq auto-revert-buffer-list-filter
+      'magit-auto-revert-repository-buffers-p)
 
-(require 'git-commit-mode)
 (require 'gitconfig-mode)
 (require 'gitignore-mode)
-(require 'magithub)
 
 ;; Toggle between split windows and a single window
 ;; http://thornydev.blogspot.com/2012/08/happiness-is-emacs-trifecta.html
@@ -123,10 +139,11 @@
 ;; color theme
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
 ;; (load-theme 'solarized-light t)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/tomorrow-theme/GNU Emacs")
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/tomorrow-theme/GNU Emacs")
 ;; (load-theme 'tomorrow-night t)
 ;; (load-theme 'tomorrow-night-bright t)
-(load-theme 'tomorrow-night-eighties t)
+;; (load-theme 'tomorrow-night-eighties t)
+(load-theme 'zenburn t)
 
 ;; GUIs are for hipsters
 (tool-bar-mode -1)
@@ -144,6 +161,8 @@
 (global-set-key "\M-q" 'query-replace)
 (global-set-key "\M-1" 'revert-buffer)
 (global-set-key [\C-escape] 'electric-buffer-list)
+(global-set-key "\M-z" 'undo)
+(global-set-key "\M-v" 'yank)
 
 ;; scroll line by line
 (setq scroll-step 1)
@@ -193,6 +212,7 @@
 ;; coffee-mode: https://github.com/defunkt/coffee-mode
 (require 'coffee-mode)
 (setq coffee-tab-width 2)
+(setq typescript-indent-level 2)
 
 ;; less css mode: https://github.com/purcell/less-css-mode
 (setq css-indent-offset 2)
@@ -225,6 +245,8 @@
 
 ;; go
 (require 'go-mode)
+(setq gofmt-command "goimports")
+(setq gofmt-is-goimports t)
 ;; tabs are ok in go-mode
 (add-hook 'go-mode-hook
           (lambda ()
@@ -238,6 +260,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(mac-option-modifier (quote meta))
  '(solarized-contrast (quote high)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -304,3 +327,5 @@ Don't mess with special buffers."
   (ansi-color-apply-on-region (point-min) (point-max))
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(require 'jsx-mode)
